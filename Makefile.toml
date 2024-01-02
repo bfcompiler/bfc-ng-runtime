@@ -1,0 +1,7 @@
+[tasks.debug]
+command = "cargo"
+args = ["run"]
+
+[tasks.release]
+command = "cargo"
+args = ["build", "--release"]

@@ -1,0 +1,18 @@
+name: build-win64-docker
+on: [workflow_dispatch]
+jobs:
+  build-executable:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Build docker container
+        run: |
+          docker build -t bfc-ng-runtime . --progress=plain
+      - name: Create folder
+        run: |
+          mkdir ${{ github.workspace }}/build/
+      - name: Save compiled file from docker
+        run: |
+          docker run --name bfc-ng-runtime --mount type=bind,source="${{ github.workspace }}"/build,target=/mount/ bfc-ng-runtime:latest
+      
