@@ -15,4 +15,9 @@ jobs:
       - name: Save compiled file from docker
         run: |
           docker run --name bfc-ng-runtime --mount type=bind,source="${{ github.workspace }}"/build,target=/mount/ bfc-ng-runtime:latest
+      - name: Save artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: bfc-ng-runtime
+          path: ${{ github.workspace }}/build/bfc-ng-runtime.exe
       
